@@ -17,7 +17,7 @@ TrelloPowerUp.initialize({
       callback: onBtnClick,
 
     }];
-  }
+  };
 
   "card-buttons": function(t, options) {
     return t.set("member", "shared", "hello", "world").then(function() {
