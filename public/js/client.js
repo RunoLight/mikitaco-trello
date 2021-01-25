@@ -12,19 +12,19 @@ TrelloPowerUp.initialize({
 
 
   // Start adding handlers for your capabilities here!
-  'board-buttons': function (t, opts) {
-    return [{
-      icon: {
-        dark: BLACK_ROCKET_ICON,
-        light: BLACK_ROCKET_ICON
-      },
-      text: 'Callback',
-      callback: function () {
-        console.log("sex");
-      },
-
-    }];
-  },
+  // 'board-buttons': function (t, opts) {
+  //   return [{
+  //     icon: {
+  //       dark: BLACK_ROCKET_ICON,
+  //       light: BLACK_ROCKET_ICON
+  //     },
+  //     text: 'Callback',
+  //     callback: function () {
+  //       console.log("sex");
+  //     },
+  //
+  //   }];
+  // },
 
   "card-buttons": function(t, options) {
     return t.set("member", "shared", "hello", "world").then(function() {
