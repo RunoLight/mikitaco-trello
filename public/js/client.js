@@ -13,6 +13,7 @@ var onBtnClick = function (t, opts) {
   console.log(t);
   console.log(opts);
 };
+// TrelloPowerUp.getall
 
 
 TrelloPowerUp.initialize({
@@ -24,6 +25,9 @@ TrelloPowerUp.initialize({
           icon: BLACK_ROCKET_ICON,
           text: "Estimate Size 2",
           callback: function(t) {
+            console.log(t.getAll());
+            console.log("context");
+            console.log(t.getContext());
             return t.popup({
               title: "Estimation",
               url: "../../views/estimate.html"
