@@ -21,6 +21,6 @@ TrelloPowerUp.initialize({
           }
         }
       ];
-    }).then(console.log(t.get("member") + " " + t.get("shader")));
+    }); //.then(console.log(t.get("member") + " " + t.get("shader")));
   }
 });
