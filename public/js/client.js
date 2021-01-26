@@ -12,6 +12,34 @@ var onBtnClick = function (t, opts) {
   console.log('Someone clicked the button');
   console.log(t);
   console.log(opts);
+
+  console.log("boards");
+  t.board("id", "name").then(function (board) {
+    console.log(JSON.stringify(board, null, 2));
+  });
+};
+
+var onBtnCards = function (t, opts) {
+  console.log("lists");
+
+  var lists = t.lists("all");
+  console.log(JSON.stringify(lists, null, 2));
+
+  console.log("list inbox");
+
+  var list = t.list("1. Inbox");
+  console.log(JSON.stringify(list, null, 2));
+
+  console.log("list all");
+
+  var list2 = t.list("all");
+  console.log(JSON.stringify(list2, null, 2));
+
+  console.log("cards all");
+
+  var cards = t.cards("all");
+  console.log(JSON.stringify(cards, null, 2));
+
 };
 // TrelloPowerUp.getall
 
@@ -23,7 +51,7 @@ TrelloPowerUp.initialize({
       return [
         {
           icon: BLACK_ROCKET_ICON,
-          text: "Estimate Size 3",
+          text: "Estimate Size 4",
           callback: function(t) {
             console.log(t.getAll());
             console.log("context");
@@ -59,6 +87,15 @@ TrelloPowerUp.initialize({
       condition: 'always',
       url: 'https://trello.com/inspiration',
       target: 'Inspiring Boards' // optional target for above url
+    }, {
+        // we can either provide a button that has a callback function
+        icon: {
+          dark: WHITE_ICON,
+          light: BLACK_ICON
+        },
+        text: 'Lists info',
+        callback: onBtnCards,
+        condition: 'edit'
     }];
   }
 });
