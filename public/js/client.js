@@ -23,7 +23,7 @@ TrelloPowerUp.initialize({
       return [
         {
           icon: BLACK_ROCKET_ICON,
-          text: "Estimate Size 2",
+          text: "Estimate Size 3",
           callback: function(t) {
             console.log(t.getAll());
             console.log("context");
