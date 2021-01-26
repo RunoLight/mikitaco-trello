@@ -10,6 +10,8 @@ var BLACK_ICON = 'https://cdn.hyperdev.com/us-east-1%3A3d31b21c-01a0-4da2-8827-4
 
 var onBtnClick = function (t, opts) {
   console.log('Someone clicked the button');
+  console.log(t);
+  console.log(opts);
 };
 
 
