@@ -59,7 +59,7 @@ TrelloPowerUp.initialize({
             console.log(t.getContext());
             return t.popup({
               title: "Estimation",
-              url: "../../views/estimate.html"
+              url: "./views/estimate.html"
             });
           }
         }
