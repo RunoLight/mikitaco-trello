@@ -42,7 +42,17 @@ var onBtnCards = function (t, opts) {
 
 };
 // TrelloPowerUp.getall
+var onREST = function (t, opts) {
+  var auth = t.getRestApi();
+  if (auth) {
+    console.log("auth");
+  }
+  else {
+    console.log("not auth");
+  }
+  console.log(auth);
 
+}
 
 TrelloPowerUp.initialize({
   // Start adding handlers for your capabilities here!
@@ -97,6 +107,17 @@ TrelloPowerUp.initialize({
         text: 'Lists info',
         callback: onBtnCards,
         condition: 'edit'
+    }, {
+      icon: {
+        dark: WHITE_ICON,
+        light: BLACK_ICON
+      },
+      text: 'REST',
+      callback: onREST,
+      condition: 'edit'
     }];
-  }
+  },
+}, {
+    appKey: 'fff4efd3f3ba3f0f515bd2aa84e97cd8',
+    appName: 'https://mikitaco-trello-power.glitch.me/'
 });
