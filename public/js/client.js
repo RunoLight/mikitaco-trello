@@ -8,6 +8,9 @@ var BLACK_ROCKET_ICON =
 var WHITE_ICON = 'https://cdn.hyperdev.com/us-east-1%3A3d31b21c-01a0-4da2-8827-4bc6e88b7618%2Ficon-white.svg';
 var BLACK_ICON = 'https://cdn.hyperdev.com/us-east-1%3A3d31b21c-01a0-4da2-8827-4bc6e88b7618%2Ficon-black.svg';
 
+var GREY_ROCKET_ICON = 'https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Frocket-ship-grey.png?1496162964717';
+var WHITE_ROCKET_ICON = 'https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Fwhite-rocket-ship.png?1495811896182';
+
 var onBtnClick = function (t, opts) {
   console.log('Someone clicked the button');
   console.log(t);
@@ -55,7 +58,9 @@ var onREST = function (t, opts) {
 }
 
 TrelloPowerUp.initialize({
-  // Start adding handlers for your capabilities here!
+  //
+  // CARD BUTTONS
+  //
   "card-buttons": function(t, options) {
     return t.set("member", "shared", "hello", "world").then(function() {
       return [
@@ -76,7 +81,50 @@ TrelloPowerUp.initialize({
       ];
     }); //.then(console.log(t.get("member") + " " + t.get("shader")));
   },
+  // 'card-badges': function(t, options) {
+  //   return [{
+  //     icon: 'https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Frocket-ship-grey.png?1496162964717',
+  //     text: '3'
+  //   }];
+  // }, // sets all cards to this badge
 
+  //
+  // CARD BADGES
+  //
+  'card-badges': function(t, options) {
+    return t.get('card', 'shared', 'estimate')
+        .then(function(estimate) {
+          return [{
+            icon: estimate ? GREY_ROCKET_ICON : WHITE_ROCKET_ICON,
+            text: estimate || 'No Estimate!',
+            color: estimate ? null : 'red',
+          }];
+        });
+  },
+
+  //
+  // CARD BADGES DETAILS
+  //
+  'card-detail-badges': function(t, options) {
+    return t.get('card', 'shared', 'estimate')
+        .then(function(estimate) {
+          return [{
+            title: 'Estimate',
+            text: estimate || 'No Estimate!',
+            color: estimate ? null : 'red',
+            callback: function(t) {
+              return t.popup({
+                title: "Estimation",
+                url: 'estimate.html',
+              });
+            }
+          }]
+        });
+  },
+
+  //
+  // BOARD BUTTONS
+  //
   'board-buttons': function (t, opts) {
     return [{
       // we can either provide a button that has a callback function
@@ -117,7 +165,26 @@ TrelloPowerUp.initialize({
       condition: 'edit'
     }];
   },
-}, {
-    appKey: 'fff4efd3f3ba3f0f515bd2aa84e97cd8',
-    appName: 'https://mikitaco-trello-power.glitch.me/'
-});
+  //
+  // AUTH STATUS
+  //
+  'authorization-status': function(t, options){
+    return t.get('member', 'private', 'authToken')
+        .then(function(authToken) {
+          return { authorized: authToken != null }
+        });
+  },
+  'show-authorization': function(t, options){
+    return t.popup({
+      title: 'Authorize 🥑 Account',
+      url: './auth.html',
+      height: 140,
+    });
+  },
+},
+    // API KEYS
+    {
+      appKey: 'fff4efd3f3ba3f0f515bd2aa84e97cd8',
+      appName: 'https://mikitaco-trello-power.glitch.me/'
+    }
+);
