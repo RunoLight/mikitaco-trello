@@ -8,9 +8,11 @@
     </style>
 </head>
 <body>
-<p id="text-to-hide">We need you to authorize first!</p>
-<button id="auth-btn" type="submit" class="mod-primary">Authorize extension to Access Trello</button>
-<h2 id="result-text"></h2>
+<div id="content">
+    <p id="text-to-hide">We need you to authorize first!</p> <br/>
+    <button id="auth-btn" type="submit" class="mod-primary">Authorize extension to Access Trello</button>
+    <h2 id="result-text"></h2>
+</div>
 <script>
     window.Promise = TrelloPowerUp.Promise;
     var t = TrelloPowerUp.iframe();
