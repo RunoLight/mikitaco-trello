@@ -24,7 +24,8 @@
       };
 
       window.Trello.authorize({
-        type: window.location.href,
+        type: 'popup',
+        return_url: window.location.href,
         name: 'Getting Started Application',
         scope: {
           read: 'true',
