@@ -22,6 +22,9 @@ var onBtnClick = function (t, opts) {
   });
 };
 
+Trello.authe
+
+
 var onBtnCards = function (t, opts) {
   console.log("lists");
 

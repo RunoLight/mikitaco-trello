@@ -9,7 +9,35 @@
     <p>This is the HTML connector for the Power-Up. It will be loaded into a hidden iframe when your Power-Up is enabled.</p>
    
     <p>Not sure what is going on? Head on over to the <a id="readme" href="">README</a>.</p>
-  
+
+    <!-- Trello client -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://api.trello.com/1/client.js?key=fff4efd3f3ba3f0f515bd2aa84e97cd8"></script>
+    <script>
+
+      var authenticationSuccess = function() {
+        console.log('Successful authentication');
+      };
+
+      var authenticationFailure = function() {
+        console.log('Failed authentication');
+      };
+      
+      window.Trello.authorize({
+        type: 'popup',
+        name: 'Getting Started Application',
+        scope: {
+          read: 'true',
+          write: 'true' },
+        expiration: 'never',
+        success: authenticationSuccess,
+        error: authenticationFailure
+      });
+
+
+    </script>
+
+    <!-- Trello powerup capabilities -->
     <script src="https://p.trellocdn.com/power-up.min.js"></script>
     <script src="https://p.trellocdn.com/power-up.js"></script>
     <script src="./js/client.js"></script>
