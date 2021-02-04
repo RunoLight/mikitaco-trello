@@ -6,6 +6,7 @@
 </head>
 <body>
 <button id="auth-btn" type="submit" class="mod-primary">Authorize extension to Access Trello</button>
+<h2 id="result-text"></h2>
 <script>
     window.Promise = TrelloPowerUp.Promise;
     var t = TrelloPowerUp.iframe();
@@ -36,6 +37,12 @@
                 // store the token in Trello private Power-Up storage
                 return t.set('member', 'private', 'token', token)
             })
+        .then(function () {
+            $("#auth-btn").hide();
+            $("#result-text").html("You're all done, popup will close itself!");
+            setTimeout(function(){ t.closePopup(); }, 1000);
+            
+        })
             //.then(function(){
             //    // now that we have the token we needed lets go on to letting
             //    // the user set the snooze time
