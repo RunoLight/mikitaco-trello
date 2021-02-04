@@ -8,11 +8,45 @@ var oauthUrl = window.origin + '/3rd-party/authorize.html';
 
 var authBtn = document.getElementById('authorize');
 authBtn.addEventListener('click', function() {
-    t.authorize(oauthUrl)
-        .then(function(token) {
-            return t.set('member', 'private', 'authToken', token)
-        })
-        .then(function() {
-            return t.closePopup();
+
+    if (window.Trello.token) {
+        console.log(window.Trello.token);
+    }
+    else {
+        window.Trello.authorize({
+            type: 'popup',
+            return_url: window.location.href,
+            name: 'Mikitaco trello business power up',
+            scope: {
+                read: 'true',
+                write: 'true'
+            },
+            expiration: 'never',
+            success: authenticationSuccess,
+            error: authenticationFailure
         });
+        console.log("LOGGED! " + window.Trello.token);
+    }
+
+
+
+
+
+    // t.authorize(oauthUrl)
+    //     .then(function(token) {
+    //         return t.set('member', 'private', 'authToken', token)
+    //     })
+    //     .then(function() {
+    //         return t.closePopup();
+    //     });
 });
+
+// authBtn.addEventListener('click', function() {
+//     t.authorize(oauthUrl)
+//         .then(function(token) {
+//             return t.set('member', 'private', 'authToken', token)
+//         })
+//         .then(function() {
+//             return t.closePopup();
+//         });
+// });

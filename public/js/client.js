@@ -139,6 +139,7 @@ let capability_card_detail_badges = function (t, options) {
             }]
         });
 };
+
 let capability_board_buttons = function (t, opts) {
     return [
         {
