@@ -22,9 +22,10 @@
       var authenticationFailure = function() {
         console.log('Failed authentication');
       };
-      
+
       window.Trello.authorize({
         type: 'popup',
+        return_url: "https://https://mikitaco.glitch.me/",
         name: 'Getting Started Application',
         scope: {
           read: 'true',
