@@ -3,8 +3,12 @@
 <head>
     <link rel="stylesheet" href="https://p.trellocdn.com/power-up.min.css">
     <script src="https://p.trellocdn.com/power-up.min.js"></script>
+    <style>
+        * { text-align: center; }
+    </style>
 </head>
 <body>
+<p id="text-to-hide">We need you to authorize first!</p>
 <button id="auth-btn" type="submit" class="mod-primary">Authorize extension to Access Trello</button>
 <h2 id="result-text"></h2>
 <script>
@@ -39,9 +43,10 @@
             })
         .then(function () {
             $("#auth-btn").hide();
+            $("#text-to-hide").hide();
             $("#result-text").html("You're all done, popup will close itself!");
             setTimeout(function(){ t.closePopup(); }, 1000);
-            
+
         })
             //.then(function(){
             //    // now that we have the token we needed lets go on to letting

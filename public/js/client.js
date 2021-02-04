@@ -194,7 +194,7 @@ let capability_authorization_status = function (t, options) {
 };
 let capability_show_authorization = function (t, options) {
     return t.popup({
-        title: 'Authorize 🥑 Account',
+        title: 'Authorize Account',
         url: './auth.html',
         height: 140,
     });
