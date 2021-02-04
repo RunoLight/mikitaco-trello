@@ -187,9 +187,9 @@ let capability_board_buttons = function (t, opts) {
 };
 
 let capability_authorization_status = function (t, options) {
-    return t.get('member', 'private', 'authToken')
-        .then(function (authToken) {
-            return {authorized: authToken != null}
+    return t.get('member', 'private', 'token')
+        .then(function (token) {
+            return {authorized: token != null}
         });
 };
 let capability_show_authorization = function (t, options) {
