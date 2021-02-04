@@ -2,14 +2,9 @@
 
 var Promise = TrelloPowerUp.Promise;
 
-var BLACK_ROCKET_ICON =
-  "https://cdn.glitch.com/1b42d7fe-bda8-4af8-a6c8-eff0cea9e08a%2Frocket-ship.png?1494946700421";
+$.getScript("icons.js")
 
-var WHITE_ICON = 'https://cdn.hyperdev.com/us-east-1%3A3d31b21c-01a0-4da2-8827-4bc6e88b7618%2Ficon-white.svg';
-var BLACK_ICON = 'https://cdn.hyperdev.com/us-east-1%3A3d31b21c-01a0-4da2-8827-4bc6e88b7618%2Ficon-black.svg';
 
-var GREY_ROCKET_ICON = 'https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Frocket-ship-grey.png?1496162964717';
-var WHITE_ROCKET_ICON = 'https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Fwhite-rocket-ship.png?1495811896182';
 
 var onBtnClick = function (t, opts) {
   console.log('Someone clicked the button');
@@ -21,9 +16,6 @@ var onBtnClick = function (t, opts) {
     console.log(JSON.stringify(board, null, 2));
   });
 };
-
-Trello.authe
-
 
 var onBtnCards = function (t, opts) {
   console.log("lists");
@@ -59,6 +51,29 @@ var onREST = function (t, opts) {
   console.log(auth);
 
 }
+
+
+var authenticationSuccess = function() {
+  console.log('Successful authentication');
+};
+
+var authenticationFailure = function() {
+  console.log('Failed authentication');
+};
+
+window.Trello.authorize({
+  type: 'popup',
+  return_url: window.location.href,
+  name: 'Mikitaco trello business power up',
+  scope: {
+    read: 'true',
+    write: 'true' },
+  expiration: 'never',
+  success: authenticationSuccess,
+  error: authenticationFailure
+});
+
+
 
 TrelloPowerUp.initialize({
   //

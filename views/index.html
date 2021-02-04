@@ -15,25 +15,7 @@
     <script src="https://api.trello.com/1/client.js?key=fff4efd3f3ba3f0f515bd2aa84e97cd8"></script>
     <script>
 
-      var authenticationSuccess = function() {
-        console.log('Successful authentication');
-      };
 
-      var authenticationFailure = function() {
-        console.log('Failed authentication');
-      };
-
-      window.Trello.authorize({
-        type: 'popup',
-        return_url: window.location.href,
-        name: 'Getting Started Application',
-        scope: {
-          read: 'true',
-          write: 'true' },
-        expiration: 'never',
-        success: authenticationSuccess,
-        error: authenticationFailure
-      });
 
 
     </script>
