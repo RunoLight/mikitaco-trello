@@ -1,7 +1,7 @@
 {
-  "name": "trello-power-up-skeleton",
+  "name": "trello-business-power-up",
   "version": "0.0.1",
-  "description": "A Power-Up skeleton to remix to start building your Power-Up!",
+  "description": "Mikitaco trello powerup to build up a business automation",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
@@ -13,7 +13,7 @@
     "node": "6.10.x"
   },
   "repository": {
-    "url": "https://glitch.com/edit/#!/trello-power-up-skeleton"
+    "url": "https://glitch.com/edit/#!/mikitaco"
   },
   "license": "MIT",
   "keywords": [
