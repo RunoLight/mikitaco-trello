@@ -49,9 +49,7 @@ var onREST = function (t, opts) {
     console.log("not auth");
   }
   console.log(auth);
-
 }
-
 
 var authenticationSuccess = function() {
   console.log('Successful authentication');
@@ -61,17 +59,17 @@ var authenticationFailure = function() {
   console.log('Failed authentication');
 };
 
-window.Trello.authorize({
-  type: 'popup',
-  return_url: window.location.href,
-  name: 'Mikitaco trello business power up',
-  scope: {
-    read: 'true',
-    write: 'true' },
-  expiration: 'never',
-  success: authenticationSuccess,
-  error: authenticationFailure
-});
+// window.Trello.authorize({
+//   type: 'popup',
+//   return_url: window.location.href,
+//   name: 'Mikitaco trello business power up',
+//   scope: {
+//     read: 'true',
+//     write: 'true' },
+//   expiration: 'never',
+//   success: authenticationSuccess,
+//   error: authenticationFailure
+// });
 
 
 
