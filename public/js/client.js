@@ -33,7 +33,7 @@ let capability_card_buttons = function (t, options) {
                     console.log(t.getContext());
                     return t.popup({
                         title: "Set status",
-                        url: "estimate.html"
+                        url: "status.html"
                     });
                 }
             },
@@ -146,8 +146,8 @@ let capability_card_detail_badges = function (t, options) {
                 color: status ? null : 'red',
                 callback: function (t) {
                     return t.popup({
-                        title: "Estimation",
-                        url: 'estimate.html',
+                        title: "Current card status",
+                        url: 'status.html',
                     });
                 }
             }]
