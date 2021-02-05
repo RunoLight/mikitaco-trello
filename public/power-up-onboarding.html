@@ -18,19 +18,6 @@
     <p>There could be a paragraph here about what is happening.</p>
 </div>
 <script>
-    // window.Promise = TrelloPowerUp.Promise;
-    // var t = TrelloPowerUp.iframe();
-    //
-    // const authBtn = document.getElementById('authorize');
-    // authBtn.addEventListener('click', function() {
-    //     t.popup({
-    //         title: 'Authorize Account',
-    //         url: './auth.html',
-    //         height: 140,
-    //     })
-    // });
-
-
     window.Promise = TrelloPowerUp.Promise;
     var t = TrelloPowerUp.iframe();
 
@@ -42,7 +29,7 @@
         scope: 'read,write',
         key: 'fff4efd3f3ba3f0f515bd2aa84e97cd8',
         callback_method: 'fragment',
-        return_url: 'https://' + window.location.host + '/auth-success.html',
+        return_url: 'https://' + window.location.host + '/power-up-onboarding.html',
     };
 
     var params = Object.keys(authParams);
