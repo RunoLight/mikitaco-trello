@@ -12,10 +12,10 @@
 <body>
 <div id="content">
     <h1>Hi there! It's power-up's how-to 🥑</h1>
-    <p>First of all, lets give access to the board via trello authorization</p>
+    <p id="text-auth">First of all, lets give access to the board via trello authorization</p>
     <button id="authorize" class="mod-primary">Authorize</button>
     <p id="auth-success"></p>
-    <p>There could be a paragraph here about what is happening.</p>
+    <p id="text-about">There could be a paragraph here about what is happening.</p>
 </div>
 <script>
     window.Promise = TrelloPowerUp.Promise;
@@ -47,10 +47,10 @@
                 return t.set('member', 'private', 'token', token)
             })
             .then(function () {
+                $("text-auth").hide();
                 $("#authorize").hide();
                 $("#auth-success").html("Well done! Now power-up has access to the board to work with.");
-
-                // setTimeout(function(){ t.closePopup(); }, 1000);
+                $("text-about").html("Some text about power up");
             })
     });
 </script>
