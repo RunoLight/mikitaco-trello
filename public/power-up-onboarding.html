@@ -29,7 +29,7 @@
         scope: 'read,write',
         key: 'fff4efd3f3ba3f0f515bd2aa84e97cd8',
         callback_method: 'fragment',
-        return_url: 'https://' + window.location.host + '/power-up-onboarding.html',
+        return_url: 'https://' + window.location.host + '/auth-success.html',
     };
 
     var params = Object.keys(authParams);
@@ -49,8 +49,8 @@
             .then(function () {
                 $("#authorize").hide();
                 $("#auth-success").html("Well done! Now power-up has access to the board to work with.");
-                consoole.log("what?");
-                setTimeout(function(){ t.closePopup(); }, 1000);
+
+                setTimeout(function(){ t.closeModal(); }, 1000);
             })
     });
 </script>
