@@ -2,8 +2,8 @@
 <html>
 <head>
     <link rel="stylesheet" href="https://p.trellocdn.com/power-up.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://p.trellocdn.com/power-up.min.js"></script>
-
     <style>
         * { text-align: center; }
         #content { padding: 30px; }
@@ -50,7 +50,7 @@
                 $("#authorize").hide();
                 $("#auth-success").html("Well done! Now power-up has access to the board to work with.");
 
-                setTimeout(function(){ t.closeModal(); }, 1000);
+                // setTimeout(function(){ t.closePopup(); }, 1000);
             })
     });
 </script>
