@@ -5,7 +5,7 @@ var t = TrelloPowerUp.iframe();
 window.status_form.addEventListener('submit', function(event){
     event.preventDefault();
 
-    t.sizeTo('#content');
+    t.sizeTo('#status_form');
 
     return t.set('card', 'shared', 'status', window.status_form.value)
         .then(function(){
@@ -19,6 +19,6 @@ t.render(function(){
             window.status_form.value = status;
         })
         .then(function(){
-            t.sizeTo('#content').done();
+            t.sizeTo('#status_form').done();
         });
 });
