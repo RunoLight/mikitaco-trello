@@ -7,7 +7,7 @@ window.status_refresh.addEventListener('submit', function(event){
 
     t.sizeTo('#status_form');
 
-    return t.set('card', 'shared', 'status', window.status_form.value)
+    return t.set('card', 'shared', 'status', window.selected_status.value)
         .then(function(){
             t.closePopup();
         });
