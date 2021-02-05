@@ -2,7 +2,7 @@
 
 var t = TrelloPowerUp.iframe();
 
-window.estimate.addEventListener('submit', function(event){
+window.content.addEventListener('submit', function(event){
     event.preventDefault();
     return t.set('card', 'shared', 'status', window.content.value)
         .then(function(){
