@@ -141,7 +141,7 @@ let capability_card_detail_badges = function (t, options) {
     return t.get('card', 'shared', 'status')
         .then(function (status) {
             return [{
-                title: 'Set status',
+                title: 'Current card status',
                 text: status || 'No status!',
                 color: status ? null : 'red',
                 callback: function (t) {
