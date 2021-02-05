@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://p.trellocdn.com/power-up.min.css">
+    <script src="https://p.trellocdn.com/power-up.min.js"></script>
+    <style>
+        * { text-align: center; }
+    </style>
+</head>
+<body>
+<div id="content">
+    <h1>Hi there! It's power-up how-to 🥑</h1>
+    <p>There could be a paragraph here about what is happening.</p>
+    <p>First of all, lets give access to the board via trello authorization</p>
+    <button id="authorize">Authorize</button>
+</div>
+<script>
+    window.Promise = TrelloPowerUp.Promise;
+    var t = TrelloPowerUp.iframe();
+
+    const authBtn = document.getElementById('authorize');
+    authBtn.addEventListener('click', function() {
+        t.popup({
+            title: 'Authorize Account',
+            url: './auth.html',
+            height: 140,
+        })
+    });
+</script>
+</body>
+</html>
+

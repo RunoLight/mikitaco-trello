@@ -200,6 +200,14 @@ let capability_show_authorization = function (t, options) {
     });
 };
 
+let capability_on_enable = function(t, options) {
+    // This code will get triggered when a user enables your Power-Up
+    return t.modal({
+        url: './power-up-onboarding.html',
+        height: 500,
+        title: 'Mikitaco powerup overview'
+    });
+};
 TrelloPowerUp.initialize(
     {
         'card-buttons': capability_card_buttons,
@@ -208,6 +216,7 @@ TrelloPowerUp.initialize(
         'board-buttons': capability_board_buttons,
         'authorization-status': capability_authorization_status,
         'show-authorization': capability_show_authorization,
+        'on-enable': capability_on_enable,
     },
     app_opts
 );
