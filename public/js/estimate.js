@@ -2,7 +2,7 @@
 
 var t = TrelloPowerUp.iframe();
 
-window.status_form.addEventListener('submit', function(event){
+window.status_refresh.addEventListener('submit', function(event){
     event.preventDefault();
 
     t.sizeTo('#status_form');
@@ -16,7 +16,7 @@ window.status_form.addEventListener('submit', function(event){
 t.render(function(){
     return t.get('card', 'shared', 'status')
         .then(function(status){
-            window.status_form.value = status;
+            window.selected_status.value = status;
         })
         .then(function(){
             t.sizeTo('#status_form').done();
