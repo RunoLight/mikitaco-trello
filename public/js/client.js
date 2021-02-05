@@ -19,6 +19,7 @@ const WHITE_ROCKET_ICON = 'https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b896
 //
 // Trello capabilities
 //
+
 let capability_card_buttons = function (t, options) {
     return t.set("member", "shared", "hello", "world").then(function () {
         return [
@@ -34,6 +35,19 @@ let capability_card_buttons = function (t, options) {
                         title: "Estimation",
                         url: "estimate.html"
                     });
+                }
+            },
+            {
+                icon: BLACK_ROCKET_ICON,
+                text: "Lists",
+                callback: function (t) {
+
+
+                    console.log("Lists");
+                    return t.lists("all").then(function (lists) {
+                        console.log(JSON.stringify(lists, null, 2));
+                    });
+
                 }
             }
         ];
