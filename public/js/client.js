@@ -25,14 +25,14 @@ let capability_card_buttons = function (t, options) {
         return [
             {
                 icon: BLACK_ROCKET_ICON,
-                text: "Estimate Size 4",
+                text: "Set order status",
                 callback: function (t) {
                     console.log("getAll");
                     console.log(t.getAll());
                     console.log("context");
                     console.log(t.getContext());
                     return t.popup({
-                        title: "Estimation",
+                        title: "Set status",
                         url: "estimate.html"
                     });
                 }
@@ -121,12 +121,12 @@ var authenticationFailure = function () {
 
 
 let capability_card_badges = function (t, options) {
-    return t.get('card', 'shared', 'estimate')
-        .then(function (estimate) {
+    return t.get('card', 'shared', 'status')
+        .then(function (status) {
             return [{
-                icon: estimate ? GREY_ROCKET_ICON : WHITE_ROCKET_ICON,
-                text: estimate || 'No Estimate!',
-                color: estimate ? null : 'red',
+                icon: status ? GREY_ROCKET_ICON : WHITE_ROCKET_ICON,
+                text: status || 'No status!',
+                color: status ? null : 'red',
             }];
         });
 };
@@ -138,12 +138,12 @@ let capability_card_badges = function (t, options) {
 // }, // sets all cards to this badge
 
 let capability_card_detail_badges = function (t, options) {
-    return t.get('card', 'shared', 'estimate')
-        .then(function (estimate) {
+    return t.get('card', 'shared', 'status')
+        .then(function (status) {
             return [{
-                title: 'Estimate',
-                text: estimate || 'No Estimate!',
-                color: estimate ? null : 'red',
+                title: 'Set status',
+                text: status || 'No status!',
+                color: status ? null : 'red',
                 callback: function (t) {
                     return t.popup({
                         title: "Estimation",

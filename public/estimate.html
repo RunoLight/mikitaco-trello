@@ -1,21 +1,24 @@
 <html>
 <head>
     <link rel="stylesheet" href="https://p.trellocdn.com/power-up.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://p.trellocdn.com/power-up.min.js"></script>
     <style>
         select { height: 30px; }
     </style>
-    <script src="https://p.trellocdn.com/power-up.min.js"></script>
 </head>
 <body>
-<form id="estimate">
-    <label for="estimateSize">Estimate:</label>
+<form id="content">
+    <label for="estimateSize">Choose new status for card:</label>
     <select name="size" id="estimateSize">
-        <option value="small">2222Small 👕</option>
-        <option value="medium">Medium 👚</option>
-        <option value="large">Large 👔</option>
-        <option value="x-large">Extra Large 👖</option>
+        <option value="inbox"     >📥 Inbox     </option>
+        <option value="cooking"   >👨‍🍳 Cooking </option>
+        <option value="to-deliver">📭 To deliver</option>
+        <option value="on-the-way">✈ On the way</option>
+        <option value="delivered" >📬 Delivered </option>
+        <option value="canceled"  >❌ Canceled  </option>
     </select>
-    <button type="submit" class="mod-primary">Save</button>
+    <button type="submit" class="mod-primary">Update</button>
 </form>
 <script src="./js/estimate.js"></script>
 </body>
