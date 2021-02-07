@@ -214,7 +214,6 @@ let capability_show_authorization = function (t, options) {
     });
 };
 
-let capability_on_enable = function(t, options) {
     // This code will get triggered when a user enables your Power-Up
     return t.modal({
         url: './power-up-onboarding.html',
