@@ -41,35 +41,35 @@ window.status_form.addEventListener('submit', function(event){
                             })
                         }
 
-                        // var thisCard = t.card("all");
-                        // var neededListNum = statusToId[selectedStatus];
-                        // var newListId = t.lists("id")[neededListNum].id;
-                        // var currentListId = t.list("id");
-                        // // add twice then?
-                        // console.log(`list id: current ${currentListId}, new ${newListId}`);
-                        //
-                        // var url = `https://api.trello.com/1/cards/${thisCard.id}?`;
-                        // var bodyParams = {
-                        //     key: opts.appKey,
-                        //     token: token,
-                        //     name: "miki ta co :)"
-                        // }
-                        //
-                        // console.log('body: ' + bodyParams.toString());
+                        var thisCard = t.card("all");
+                        var neededListNum = statusToId[selectedStatus];
+                        var newListId = t.lists("id")[neededListNum].id;
+                        var currentListId = t.list("id");
+                        // add twice then?
+                        console.log(`list id: current ${currentListId}, new ${newListId}`);
 
-                        // $.ajax({
-                        //     type: 'PUT',
-                        //     url: url,
-                        //     contentType: 'application/json',
-                        //     data: JSON.stringify(bodyParams)
-                        // })
-                        //     .done(function () {
-                        //         console.log('SUCCESS');
-                        //     }).fail(function (msg) {
-                        //     console.log('FAIL');
-                        // }).always(function (msg) {
-                        //     console.log('ALWAYS');
-                        // });
+                        var url = `https://api.trello.com/1/cards/${thisCard.id}?`;
+                        var bodyParams = {
+                            key: opts.appKey,
+                            token: token,
+                            name: "miki ta co :)"
+                        }
+
+                        console.log('body: ' + bodyParams.toString());
+
+                        $.ajax({
+                            type: 'PUT',
+                            url: url,
+                            contentType: 'application/json',
+                            data: JSON.stringify(bodyParams)
+                        })
+                            .done(function () {
+                                console.log('SUCCESS');
+                            }).fail(function (msg) {
+                            console.log('FAIL');
+                        }).always(function (msg) {
+                            console.log('ALWAYS');
+                        });
 
                         // fetch(url, {
                         //     method: 'PUT',
