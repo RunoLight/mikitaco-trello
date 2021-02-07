@@ -3,25 +3,23 @@ function parseCardDesc(desc) {
 
 }
 
-// const fetch = require('node-fetch');
+const statusToId = {
+    "inbox": 0,
+    "cooking": 1,
+    "to-deliver": 2,
+    "on-the-way": 3,
+    "delivered": 4,
+    "canceled": 5
+};
 
-var statusToId = {
-    "inbox" : 0,
-    "cooking" : 1,
-    "to-deliver" : 2,
-    "on-the-way" : 3,
-    "delivered" : 4,
-    "canceled" : 5
-}
-
-var opts = {
+const opts = {
     appKey: 'fff4efd3f3ba3f0f515bd2aa84e97cd8',
     appName: 'Mikitaco business power up'
-}
+};
 
 var t = TrelloPowerUp.iframe(opts);
 
-window.status_form.addEventListener('submit', function(event){
+window.status_form.addEventListener('submit', function (event) {
     event.preventDefault();
 
     t.sizeTo('#status_form');
@@ -30,7 +28,7 @@ window.status_form.addEventListener('submit', function(event){
     console.log("selected value " + selectedStatus);
 
     return t.set('card', 'shared', 'status', selectedStatus)
-        .then(function(){
+        .then(function () {
             t.getRestApi()
                 .getToken()
                 .then(function (token) {
@@ -41,35 +39,46 @@ window.status_form.addEventListener('submit', function(event){
                             })
                         }
 
-                        var thisCard = t.card("all");
+                        console.log("here");
                         var neededListNum = statusToId[selectedStatus];
-                        var newListId = t.lists("id")[neededListNum].id;
-                        var currentListId = t.list("id");
-                        // add twice then?
-                        console.log(`list id: current ${currentListId}, new ${newListId}`);
 
-                        var url = `https://api.trello.com/1/cards/${thisCard.id}?`;
-                        var bodyParams = {
-                            key: opts.appKey,
-                            token: token,
-                            name: "miki ta co :)"
-                        }
+                        return t.lists("id")
+                            .then(function (lists) {
+                                var newListId = lists[neededListNum].id;
 
-                        console.log('body: ' + bodyParams.toString());
+                                return t.card("all")
+                                    .then(function (cardInfo) {
 
-                        $.ajax({
-                            type: 'PUT',
-                            url: url,
-                            contentType: 'application/json',
-                            data: JSON.stringify(bodyParams)
-                        })
-                            .done(function () {
-                                console.log('SUCCESS');
-                            }).fail(function (msg) {
-                            console.log('FAIL');
-                        }).always(function (msg) {
-                            console.log('ALWAYS');
-                        });
+                                        console.log(cardInfo);
+
+                                        var parsedCardInfo = parseCardDesc(cardInfo);
+
+
+                                        var url = `https://api.trello.com/1/cards/${cardInfo.id}?`;
+                                        var bodyParams = {
+                                            key: opts.appKey,
+                                            token: token,
+                                            name: "miki ta co :)"
+                                        }
+                                        console.log('body: ' + bodyParams.toString());
+
+                                        $.ajax({
+                                            type: 'PUT',
+                                            url: url,
+                                            contentType: 'application/json',
+                                            data: JSON.stringify(bodyParams)
+                                        })
+                                            .done(function () {
+                                                console.log('SUCCESS');
+                                            }).fail(function (msg) {
+                                            console.log('FAIL');
+                                        }).always(function (msg) {
+                                            console.log('ALWAYS');
+                                        });
+
+                                    })
+                            });
+
 
                         // fetch(url, {
                         //     method: 'PUT',
@@ -94,12 +103,12 @@ window.status_form.addEventListener('submit', function(event){
 //     event.preventDefault();
 // });
 
-t.render(function(){
+t.render(function () {
     return t.get('card', 'shared', 'status')
-        .then(function(status){
+        .then(function (status) {
             window.selected_status.value = status;
         })
-        .then(function(){
+        .then(function () {
             t.sizeTo('#status_form').done();
         })
         .then(
