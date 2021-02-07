@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang=en>
+<head>
+    <meta charset=utf-8>
+    <title>Authorize</title>
+</head>
+<body>
+<button type=button>Click to authorize</button>
+<script src="https://p.trellocdn.com/power-up.min.js"></script>
+<script>
+    var t = window.TrelloPowerUp.iframe({
+        appKey: 'fff4efd3f3ba3f0f515bd2aa84e97cd8',
+        appName: 'Mikitaco business power up'
+    });
+
+    t.render(function() {
+        document.querySelector('button').addEventListener('click', function() {
+            t.getRestApi()
+                .authorize({ scope: 'read,write' })
+                .then(function(t) {
+                    alert('Success!');
+                })
+                .catch(TrelloPowerUp.restApiError.AuthDeniedError, function() {
+                alert('Cancelled!');
+            })
+        }, false);
+    });
+</script>
+</body>
+</html>
