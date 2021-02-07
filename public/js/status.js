@@ -21,9 +21,7 @@ var opts = {
 
 var t = TrelloPowerUp.iframe(opts);
 
-window.status_refresh.addEventListener('submit', function(event){
-    event.preventDefault();
-
+$('.btn').click(function () {
     t.sizeTo('#status_form');
     var selectedStatus = window.selected_status.value;
 
@@ -32,59 +30,63 @@ window.status_refresh.addEventListener('submit', function(event){
             t.getRestApi()
                 .getToken()
                 .then(function (token) {
-                    if (!token) {
-                        t.popup({
-                            title: 'Authorize to continue',
-                            url: './restAuthorize.html'
+                        if (!token) {
+                            t.popup({
+                                title: 'Authorize to continue',
+                                url: './restAuthorize.html'
+                            })
+                        }
+
+                        var thisCard = t.card("all");
+                        var neededListNum = statusToId[selectedStatus];
+                        var newListId = t.lists("id")[neededListNum].id;
+                        var currentListId = t.list("id");
+                        // add twice then?
+                        console.log(`list id: current ${currentListId}, new ${newListId}`);
+
+                        var url = `https://api.trello.com/1/cards/${thisCard.id}?`;
+                        var bodyParams = {
+                            key: opts.appKey,
+                            token: token,
+                            name: "miki ta co :)"
+                        }
+
+                        $.ajax({
+                            type: 'PUT',
+                            url: url,
+                            contentType: 'application/json',
+                            data: JSON.stringify(bodyParams)
                         })
+                            .done(function () {
+                                console.log('SUCCESS');
+                            }).fail(function (msg) {
+                            console.log('FAIL');
+                        }).always(function (msg) {
+                            console.log('ALWAYS');
+                        });
+
+                        // fetch(url, {
+                        //     method: 'PUT',
+                        //     headers: {
+                        //         'Accept': 'application/json'
+                        //     },
+                        //     body: bodyParams
+                        // })
+                        //     .then(response => {
+                        //         console.log(`Response: ${response.status} ${response.statusText}`);
+                        //         return response.text();
+                        //     })
+                        //     .then(text => console.log(text))
+                        //     .then(err => console.error(err));
                     }
-
-                    var thisCard = t.card("all");
-                    var neededListNum = statusToId[selectedStatus];
-                    var newListId = t.lists("id")[neededListNum].id;
-                    var currentListId = t.list("id");
-                    // add twice then?
-                    console.log(`list id: current ${currentListId}, new ${newListId}`);
-
-                    var url = `https://api.trello.com/1/cards/${thisCard.id}?`;
-                    var bodyParams = {
-                        key: opts.appKey,
-                        token: token,
-                        name: "miki ta co :)"
-                    }
-
-                    $.ajax({
-                        type: 'PUT',
-                        url: url,
-                        contentType: 'application/json',
-                        data: JSON.stringify(bodyParams)
-                    })
-                        .done(function () {
-                            console.log('SUCCESS');
-                        }).fail(function (msg) {
-                        console.log('FAIL');
-                    }).always(function (msg) {
-                        console.log('ALWAYS');
-                    });
-
-                    // fetch(url, {
-                    //     method: 'PUT',
-                    //     headers: {
-                    //         'Accept': 'application/json'
-                    //     },
-                    //     body: bodyParams
-                    // })
-                    //     .then(response => {
-                    //         console.log(`Response: ${response.status} ${response.statusText}`);
-                    //         return response.text();
-                    //     })
-                    //     .then(text => console.log(text))
-                    //     .then(err => console.error(err));
-                }
-            );
+                );
             t.closePopup();
         });
-});
+})
+
+// window.status_refresh.addEventListener('submit', function(event){
+//     event.preventDefault();
+// });
 
 t.render(function(){
     return t.get('card', 'shared', 'status')
