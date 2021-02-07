@@ -1,11 +1,15 @@
 <!doctype html>
 <html lang=en>
 <head>
-    <meta charset=utf-8>
+    <link rel="stylesheet" href="https://p.trellocdn.com/power-up.min.css">
+    <script src="https://p.trellocdn.com/power-up.min.js"></script>
+    <style>
+        * { text-align: center; }
+    </style>
     <title>Authorize</title>
 </head>
 <body>
-<button type=button>Click to authorize</button>
+<button type="button" class="mod-primary">Click to authorize</button>
 <script src="https://p.trellocdn.com/power-up.min.js"></script>
 <script>
     var t = window.TrelloPowerUp.iframe({
@@ -18,10 +22,11 @@
             t.getRestApi()
                 .authorize({ scope: 'read,write' })
                 .then(function(t) {
-                    alert('Success!');
+                    t.closePopup();
                 })
                 .catch(TrelloPowerUp.restApiError.AuthDeniedError, function() {
                 alert('Cancelled!');
+                t.closePopup();
             })
         }, false);
     });
