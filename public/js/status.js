@@ -21,7 +21,7 @@ var opts = {
 
 var t = TrelloPowerUp.iframe(opts);
 
-$('.btn').click(function () {
+$('#btn')[0].click(function () {
     // t.sizeTo('#status_form');
     var selectedStatus = window.selected_status.value;
     console.log("selected value " + selectedStatus);
@@ -54,20 +54,19 @@ $('.btn').click(function () {
 
                         console.log('body: ' + bodyParams.toString());
 
-
-                        $.ajax({
-                            type: 'PUT',
-                            url: url,
-                            contentType: 'application/json',
-                            data: JSON.stringify(bodyParams)
-                        })
-                            .done(function () {
-                                console.log('SUCCESS');
-                            }).fail(function (msg) {
-                            console.log('FAIL');
-                        }).always(function (msg) {
-                            console.log('ALWAYS');
-                        });
+                        // $.ajax({
+                        //     type: 'PUT',
+                        //     url: url,
+                        //     contentType: 'application/json',
+                        //     data: JSON.stringify(bodyParams)
+                        // })
+                        //     .done(function () {
+                        //         console.log('SUCCESS');
+                        //     }).fail(function (msg) {
+                        //     console.log('FAIL');
+                        // }).always(function (msg) {
+                        //     console.log('ALWAYS');
+                        // });
 
                         // fetch(url, {
                         //     method: 'PUT',
