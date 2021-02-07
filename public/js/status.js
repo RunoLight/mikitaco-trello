@@ -3,7 +3,7 @@ function parseCardDesc(desc) {
 
 }
 
-const fetch = require('node-fetch');
+// const fetch = require('node-fetch');
 
 var statusToId = {
     "inbox" : 0,
@@ -53,19 +53,33 @@ window.status_refresh.addEventListener('submit', function(event){
                         name: "miki ta co :)"
                     }
 
-                    fetch(url, {
-                        method: 'PUT',
-                        headers: {
-                            'Accept': 'application/json'
-                        },
-                        body: bodyParams
+                    $.ajax({
+                        type: 'PUT',
+                        url: url,
+                        contentType: 'application/json',
+                        data: JSON.stringify(bodyParams)
                     })
-                        .then(response => {
-                            console.log(`Response: ${response.status} ${response.statusText}`);
-                            return response.text();
-                        })
-                        .then(text => console.log(text))
-                        .then(err => console.error(err));
+                        .done(function () {
+                            console.log('SUCCESS');
+                        }).fail(function (msg) {
+                        console.log('FAIL');
+                    }).always(function (msg) {
+                        console.log('ALWAYS');
+                    });
+
+                    // fetch(url, {
+                    //     method: 'PUT',
+                    //     headers: {
+                    //         'Accept': 'application/json'
+                    //     },
+                    //     body: bodyParams
+                    // })
+                    //     .then(response => {
+                    //         console.log(`Response: ${response.status} ${response.statusText}`);
+                    //         return response.text();
+                    //     })
+                    //     .then(text => console.log(text))
+                    //     .then(err => console.error(err));
                 }
             );
             t.closePopup();
