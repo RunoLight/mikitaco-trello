@@ -23,7 +23,10 @@ function showAuthorization(t) {
     return t.popup({
         title: 'Authorize to continue',
         url: './restAuthorize.html'
-    });
+    })
+        .then(function () {
+            t.closePopup();
+        });
 }
 
 let setStatusBtn = function (t) {
