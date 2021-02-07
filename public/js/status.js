@@ -22,8 +22,9 @@ var opts = {
 var t = TrelloPowerUp.iframe(opts);
 
 $('.btn').click(function () {
-    t.sizeTo('#status_form');
+    // t.sizeTo('#status_form');
     var selectedStatus = window.selected_status.value;
+    console.log("selected value " + selectedStatus);
 
     return t.set('card', 'shared', 'status', selectedStatus)
         .then(function(){
@@ -50,6 +51,9 @@ $('.btn').click(function () {
                             token: token,
                             name: "miki ta co :)"
                         }
+
+                        console.log('body: ' + bodyParams.toString());
+
 
                         $.ajax({
                             type: 'PUT',
