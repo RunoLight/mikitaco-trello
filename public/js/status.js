@@ -79,5 +79,17 @@ t.render(function(){
         })
         .then(function(){
             t.sizeTo('#status_form').done();
-        });
+        })
+        .then(
+            t.getRestApi()
+                .getToken()
+                .then(function (token) {
+                    if (!token) {
+                        t.popup({
+                            title: 'Authorize to continue',
+                            url: './restAuthorize.html'
+                        })
+                    }
+                })
+        );
 });
