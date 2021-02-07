@@ -21,7 +21,7 @@ const WHITE_ROCKET_ICON = 'https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b896
 //
 function showAuthorization(t) {
     return t.popup({
-        title: 'Authorize to continue',
+        title: 'Authorize',
         url: './restAuthorize.html'
     })
         .then(function () {
