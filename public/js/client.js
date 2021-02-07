@@ -19,14 +19,55 @@ const WHITE_ROCKET_ICON = 'https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b896
 //
 // Trello capabilities
 //
+function showAuthorization(t) {
+    return t.popup({
+        title: 'Authorize to continue',
+        url: './restAuthorize.html'
+    });
+}
+
+let setStatusBtn = function (t) {
+    return t.popup({
+        title: "Set status",
+        url: "status.html"
+    });
+};
 
 let capability_card_buttons = function (t, options) {
+    return t.getRestApi()
+        .isAuthorized()
+        .then(function (isAuthorized) {
+            if (isAuthorized) {
+                return [
+                    {
+                        icon: BLACK_ROCKET_ICON,
+                        text: "Set order status",
+                        callback: setStatusBtn
+                    }
+                ]
+            } else { // Not authorized
+                return [
+                    {
+                        icon: BLACK_ROCKET_ICON,
+                        text: 'Authorize to use power-up',
+                        callback: showAuthorization
+                    }
+                ]
+            }
+        }
+        )
+}
+
+
+let capability_card_buttons_old = function (t, options) {
     return t.set("member", "shared", "hello", "world").then(function () {
         return [
             {
                 icon: BLACK_ROCKET_ICON,
                 text: "Set order status",
                 callback: function (t) {
+
+
                     console.log("getAll");
                     console.log(t.getAll());
                     console.log("context");
@@ -36,6 +77,10 @@ let capability_card_buttons = function (t, options) {
                         url: "status.html"
                     });
                 }
+            }, {
+
+
+
             },
             {
                 icon: BLACK_ROCKET_ICON,
@@ -46,8 +91,51 @@ let capability_card_buttons = function (t, options) {
                     console.log("Lists");
                     return t.lists("all").then(function (lists) {
                         console.log(JSON.stringify(lists, null, 2));
+
+
                     });
 
+                }
+            },
+            {
+                icon: BLACK_ICON,
+                text: "Move",
+                callback: function (t) {
+                    return t.get('card', 'shared', 'status')
+                        .then(function (status) {
+
+                            var lists = t.lists("id");
+                            var onTheWayId = lists[0].id;
+
+                            console.log(status);
+                            switch (status) {
+                                case "Inbox":
+
+                                    break;
+                                case "Cooking":
+
+
+                                    break;
+                                case "To deliver":
+
+                                    break;
+                                case "On the way":
+
+                                    break;
+                                case "Delivered":
+
+                                    break;
+                                case "Canceled":
+
+                                    break;
+                                default:
+                                    // Set to inbox here?
+                                    console.log("woops! unknown status!");
+                                    break;
+                            }
+
+
+                        })
                 }
             }
         ];
@@ -214,6 +302,7 @@ let capability_show_authorization = function (t, options) {
     });
 };
 
+let capability_on_enable = function (t, options) {
     // This code will get triggered when a user enables your Power-Up
     return t.modal({
         url: './power-up-onboarding.html',
