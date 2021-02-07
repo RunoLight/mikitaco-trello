@@ -21,8 +21,11 @@ var opts = {
 
 var t = TrelloPowerUp.iframe(opts);
 
-$('#btn')[0].click(function () {
-    // t.sizeTo('#status_form');
+window.status_form.addEventListener('submit', function(event){
+    event.preventDefault();
+
+    t.sizeTo('#status_form');
+
     var selectedStatus = window.selected_status.value;
     console.log("selected value " + selectedStatus);
 
@@ -38,21 +41,21 @@ $('#btn')[0].click(function () {
                             })
                         }
 
-                        var thisCard = t.card("all");
-                        var neededListNum = statusToId[selectedStatus];
-                        var newListId = t.lists("id")[neededListNum].id;
-                        var currentListId = t.list("id");
-                        // add twice then?
-                        console.log(`list id: current ${currentListId}, new ${newListId}`);
-
-                        var url = `https://api.trello.com/1/cards/${thisCard.id}?`;
-                        var bodyParams = {
-                            key: opts.appKey,
-                            token: token,
-                            name: "miki ta co :)"
-                        }
-
-                        console.log('body: ' + bodyParams.toString());
+                        // var thisCard = t.card("all");
+                        // var neededListNum = statusToId[selectedStatus];
+                        // var newListId = t.lists("id")[neededListNum].id;
+                        // var currentListId = t.list("id");
+                        // // add twice then?
+                        // console.log(`list id: current ${currentListId}, new ${newListId}`);
+                        //
+                        // var url = `https://api.trello.com/1/cards/${thisCard.id}?`;
+                        // var bodyParams = {
+                        //     key: opts.appKey,
+                        //     token: token,
+                        //     name: "miki ta co :)"
+                        // }
+                        //
+                        // console.log('body: ' + bodyParams.toString());
 
                         // $.ajax({
                         //     type: 'PUT',
