@@ -57,8 +57,7 @@ let capability_card_buttons = function (t, options) {
                     }
                 ]
             }
-        }
-        )
+        })
 }
 
 
@@ -69,8 +68,6 @@ let capability_card_buttons_old = function (t, options) {
                 icon: BLACK_ROCKET_ICON,
                 text: "Set order status",
                 callback: function (t) {
-
-
                     console.log("getAll");
                     console.log(t.getAll());
                     console.log("context");
@@ -80,65 +77,15 @@ let capability_card_buttons_old = function (t, options) {
                         url: "status.html"
                     });
                 }
-            }, {
-
-
-
             },
             {
                 icon: BLACK_ROCKET_ICON,
                 text: "Lists",
                 callback: function (t) {
-
-
                     console.log("Lists");
                     return t.lists("all").then(function (lists) {
                         console.log(JSON.stringify(lists, null, 2));
-
-
                     });
-
-                }
-            },
-            {
-                icon: BLACK_ICON,
-                text: "Move",
-                callback: function (t) {
-                    return t.get('card', 'shared', 'status')
-                        .then(function (status) {
-
-                            var lists = t.lists("id");
-                            var onTheWayId = lists[0].id;
-
-                            console.log(status);
-                            switch (status) {
-                                case "Inbox":
-
-                                    break;
-                                case "Cooking":
-
-
-                                    break;
-                                case "To deliver":
-
-                                    break;
-                                case "On the way":
-
-                                    break;
-                                case "Delivered":
-
-                                    break;
-                                case "Canceled":
-
-                                    break;
-                                default:
-                                    // Set to inbox here?
-                                    console.log("woops! unknown status!");
-                                    break;
-                            }
-
-
-                        })
                 }
             }
         ];
@@ -189,14 +136,6 @@ var onREST = function (t, opts) {
     }
     console.log(auth);
 }
-
-var authenticationSuccess = function () {
-    console.log('Successful authentication');
-};
-
-var authenticationFailure = function () {
-    console.log('Failed authentication');
-};
 
 // window.Trello.authorize({
 //   type: 'popup',

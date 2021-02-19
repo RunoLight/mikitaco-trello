@@ -4,12 +4,12 @@ function parseCardDesc(desc) {
 }
 
 const statusToId = {
-    "inbox": 0,
-    "cooking": 1,
-    "to-deliver": 2,
-    "on-the-way": 3,
-    "delivered": 4,
-    "canceled": 5
+    "Inbox": 0,
+    "Cooking": 1,
+    "To deliver": 2,
+    "On the way": 3,
+    "Delivered": 4,
+    "Canceled": 5
 };
 
 const opts = {
@@ -29,9 +29,9 @@ window.status_form.addEventListener('submit', function (event) {
 
     return t.set('card', 'shared', 'status', selectedStatus)
         .then(function () {
-            t.getRestApi()
+            return t.getRestApi()
                 .getToken()
-                .then(function (token) {
+                .then(async function (token) {
                         if (!token) {
                             t.popup({
                                 title: 'Authorize to continue',
@@ -39,45 +39,71 @@ window.status_form.addEventListener('submit', function (event) {
                             })
                         }
 
-                        console.log("here");
                         var neededListNum = statusToId[selectedStatus];
 
-                        return t.lists("id")
-                            .then(function (lists) {
-                                var newListId = lists[neededListNum].id;
+                        var cardInfo = await t.card('all');
+                        var listIds = await t.lists('all'); // get ids instead
 
-                                return t.card("all")
-                                    .then(function (cardInfo) {
+                        var listId = await cardInfo.idList;
+                        var cardId = await cardInfo.id;
 
-                                        console.log(cardInfo);
+                        var newListId = listIds[neededListNum].id; // await
+                        console.log('lists');
+                        await console.log(listIds);
+                        console.log('needed list number');
+                        console.log(neededListNum);
+                        console.log('needed list id');
+                        console.log(newListId);
+                        console.log(listIds[neededListNum]);
+                        console.log("card");
+                        console.log(cardInfo);
 
-                                        var parsedCardInfo = parseCardDesc(cardInfo);
+                        var parsedCardInfo = parseCardDesc(cardInfo);
+
+                        var url = `https://api.trello.com/1/cards/${cardId}?`;
+                        var bodyParams = {
+                            key: opts.appKey,
+                            token: token,
+                            name: "miki ta co :)",
+                            desc: "lol!",
+                            idList: newListId
+                        }
+                        console.log('body');
+                        console.log(bodyParams);
+                        console.log('url');
+                        console.log(url);
+
+                    $.ajax({
+                        type: 'PUT',
+                        url: url,
+                        //contentType: 'application/json',
+                        //data: JSON.stringify(bodyParams)
+                        data: bodyParams
+                        ,
+                        success: function (response) {
+                            console.log("okie");
+                            console.log(response);
+                            t.closePopup();
+                        },
+                        error: function (response) {
+                            console.log('error');
+                            console.log(response);
+                            t.closePopup();
+                        }
+                    });
 
 
-                                        var url = `https://api.trello.com/1/cards/${cardInfo.id}?`;
-                                        var bodyParams = {
-                                            key: opts.appKey,
-                                            token: token,
-                                            name: "miki ta co :)"
-                                        }
-                                        console.log('body: ' + bodyParams.toString());
+                     //       .done(function () {
+                     //           console.log('SUCCESS');
+                     //       }).fail(function (msg) {
+                     //       console.log('FAIL');
+                     //   }).always(function (msg) {
+                     //       console.log('ALWAYS');
+                     //   });
 
-                                        $.ajax({
-                                            type: 'PUT',
-                                            url: url,
-                                            contentType: 'application/json',
-                                            data: JSON.stringify(bodyParams)
-                                        })
-                                            .done(function () {
-                                                console.log('SUCCESS');
-                                            }).fail(function (msg) {
-                                            console.log('FAIL');
-                                        }).always(function (msg) {
-                                            console.log('ALWAYS');
-                                        });
 
-                                    })
-                            });
+                        // t.closePopup();
+
 
 
                         // fetch(url, {
@@ -95,7 +121,7 @@ window.status_form.addEventListener('submit', function (event) {
                         //     .then(err => console.error(err));
                     }
                 );
-            t.closePopup();
+
         });
 })
 
